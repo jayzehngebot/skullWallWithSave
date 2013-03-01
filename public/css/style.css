@@ -1,0 +1,33 @@
+html {
+	font-family: 'VT323', cursive;
+}
+
+body {
+	padding: 50px;
+	margin: 0;
+	overflow: hidden;
+	background: black;
+	color: #B3B3B3;
+	background-image: url(../images/bgTile02.png);
+}
+
+a {
+  color: #00B7FF;
+}
+
+h1 {
+	text-align: right;
+	opacity:.3; 
+	font-size: 90px;
+	font-weight: 10px;
+   -webkit-text-stroke-width: .25px;
+   -webkit-text-stroke-color: #FFFFF0;
+}
+
+a:link{
+	font-size: 30px;
+}
+
+.smallLink {
+	text-size: 10px;
+}
