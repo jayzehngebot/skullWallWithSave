@@ -6,6 +6,7 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var mongoose = require('mongoose');
 
 // the ExpressJS App
 var app = express();
@@ -33,7 +34,7 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
 
   // database - skipping until week 5
-  // app.db = mongoose.connect(process.env.MONGOLAB_URI);
+  app.db = mongoose.connect(process.env.MONGOLAB_URI);
   
 });
 
@@ -46,11 +47,12 @@ app.configure('development', function(){
 var routes = require('./routes/index.js');
 app.get('/', routes.index);
 
-app.get('/draw', routes.draw);
-app.post('/',routes.postlibs); //form POST submits here
+app.get('/draw', routes.makeDrawing);
+app.post('/draw', routes.postDrawing);
+app.get('/doneDrawing', routes.doneDrawing);
 
+//app.post('/',routes.postlibs); //form POST submits here
 //app.get('/astronauts/:astro_id', routes.detail);
-
 // create NodeJS HTTP server using 'app'
 
 http.createServer(app).listen(app.get('port'), function(){

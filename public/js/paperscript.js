@@ -13,7 +13,7 @@
             path.strokeWidth = '7'
 
             // Select the path, so we can see its segment points:
-            path.fullySelected = true;
+            path.fullySelected = false;
         }
 
         // While the user drags the mouse, points are added to the path
@@ -30,6 +30,6 @@
             path.simplify(10);
 
             // Select the path, so we can see its segments:
-            path.fullySelected = true;
+            path.fullySelected = false;
 
         }

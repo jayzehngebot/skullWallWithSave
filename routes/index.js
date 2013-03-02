@@ -20,30 +20,60 @@ exports.index = function(req, res) {
 }
 
 
-exports.draw = function(req,res) {
+exports.makeDrawing = function(req,res) {
 	var templateData = {
 		updatedText : textHolder
 	}
 	res.render('draw.html', templateData); 
 }
 
+exports.postDrawing = function(req,res) {
+	var templateData = [];
+		console.log("posting a drawing");
+		console.log(req.body);
 
-exports.postlibs = function(req,res) {
-	console.log("posted a word")
-	var submittedWord = ""
-	submittedWord = req.body.dog;
+		var newSkull = {
+		skull : req.body.textArea,
+		name : req.body.skullName,
+		}
 
-	var writeNewWord = function() {
-		var n = madSetParagraph.text.replace("adj01",submittedWord);
-	    textHolder = n;
-	};
+		skulls.push(newSkull);
 
-	writeNewWord();
+		console.log(skulls);
 
-	res.redirect('/updated')
+		//console.log(finishedDrawing);
+	
+	res.render('/doneDrawing.html', templateData); 
 }
+
+exports.doneDrawing = function(req,res) {
+	var templateData = {
+		skulls : skulls,
+	}
+	res.render('doneDrawing.html', templateData); 
+}
+
+
+// exports.postlibs = function(req,res) {
+// 	console.log("posted a word")
+// 	var submittedWord = ""
+// 	submittedWord = req.body.dog;
+
+// 	var writeNewWord = function() {
+// 		var n = madSetParagraph.text.replace("adj01",submittedWord);
+// 	    textHolder = n;
+// 	}
+
+// 	writeNewWord();
+
+// 	res.redirect('/updated')
+// }
 
 var projectTitle = "SKULLWALL";
 
 var textHolder = "";
+
+var skulls = [];
+
+
 

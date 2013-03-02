@@ -1,3 +1,28 @@
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+	alert("document ready");
+
+        function save() {
+            var canvas  = document.getElementById("canvas");
+            //the skull lives below
+            var dataUrl = canvas.toDataURL();
+            //alert(dataUrl);
+            document.getElementById('hiddenField').value = dataUrl;
+            document.getElementById("skullForm").submit();
+            alert("saving");
+        }
+    });
+    </script>
+
 <h2>draw here</h2>
 
-		<div><canvas id="canvas" resize></canvas></div>
+		<div><canvas id="canvas"></canvas></div>
+
+
+<form id="skullForm" method="POST">
+	give skull a name : <input type="text" name="skullName">
+	<input type='hidden' id= 'hiddenField' name='skullDrawing' value=''>
+	<input type="button" value="Submit" onclick="save()" />
+</form>
