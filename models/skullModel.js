@@ -11,4 +11,4 @@ var skullSchema = new Schema({
 });
 
 // export 'Astronaut' model
-module.exports = mongoose.model('skullDrawing',skullSchema);
+module.exports = mongoose.model('skullModel',skullSchema);

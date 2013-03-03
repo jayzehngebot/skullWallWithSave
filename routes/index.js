@@ -4,7 +4,8 @@
  * 
  * Routes contains the functions (callbacks) associated with request urls.
  */
-
+var moment = require("moment"); // date manipulation library
+var skullModel = require('../models/skullModel.js');
 
 exports.index = function(req, res) {
 	
@@ -12,8 +13,6 @@ exports.index = function(req, res) {
 
 	var templateData = {
 		title : projectTitle,
-		//text : madSetParagraph.text,
-		//numberOfWordsNeeded : madSetParagraph.numberOfWordsNeeded
 	}
 
 	res.render('index.html', templateData);
@@ -28,29 +27,51 @@ exports.makeDrawing = function(req,res) {
 }
 
 exports.postDrawing = function(req,res) {
-	var templateData = [];
+	//var templateData = [];
 		console.log("posting a drawing");
 		console.log(req.body);
 
-		var newSkull = {
-		skull : req.body.skullDrawing,
+		var newSkull = new skullModel({
 		name : req.body.skullName,
+		skull : req.body.skullDrawing
+		});
+			
+		newSkull.save(function(err){
+		if (err) {
+			console.error("Error on saving new skull");
+			console.Error("err");
+			return res.send("There was an error when creating a new skull");
+
+		} else {
+			console.log("Created a new skull");
+			console.log(newSkull);
+			
+			res.redirect('/done');
 		}
 
-		skulls.push(newSkull);
-
-		console.log(skulls);
-
-		//console.log(finishedDrawing);
-	
-	res.redirect('/done/'); 
+	});
 }
 
 exports.done = function(req,res) {
-	var templateData = {
-		skulls : skulls,
-	}
-	res.render('done.html', templateData); 
+
+	skullModel.find({}, 'skull', function(err, allSkulls) {
+
+		if (err) {
+			console.error("fuck");
+			console.error(err);
+		}
+		if (allSkulls == null) {
+			console.log("no skulls, sorry");
+		} else {
+			console.log("found some skulls");
+				var templateData = {
+				skulls : allSkulls
+				}
+
+			res.render('done.html', templateData); 
+			
+			}
+		});
 }
 
 
@@ -69,11 +90,11 @@ exports.done = function(req,res) {
 // 	res.redirect('/updated')
 // }
 
+
+
 var projectTitle = "SKULLWALL";
 
 var textHolder = "";
-
-var skulls = [];
 
 
 
