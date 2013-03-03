@@ -49,7 +49,7 @@ app.get('/', routes.index);
 
 app.get('/draw', routes.makeDrawing);
 app.post('/draw', routes.postDrawing);
-app.get('/doneDrawing', routes.doneDrawing);
+app.get('/done', routes.done);
 
 //app.post('/',routes.postlibs); //form POST submits here
 //app.get('/astronauts/:astro_id', routes.detail);

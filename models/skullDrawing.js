@@ -6,6 +6,7 @@ var skullSchema = new Schema({
     slug : { type: String, lowercase: true, unique: true },
     name : String,
     skullSVG : String,
+    stackOrder : String,
     lastupdated : { type: Date, default: Date.now }
 });
 

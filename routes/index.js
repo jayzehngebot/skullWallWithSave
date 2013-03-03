@@ -33,7 +33,7 @@ exports.postDrawing = function(req,res) {
 		console.log(req.body);
 
 		var newSkull = {
-		skull : req.body.textArea,
+		skull : req.body.skullDrawing,
 		name : req.body.skullName,
 		}
 
@@ -43,14 +43,14 @@ exports.postDrawing = function(req,res) {
 
 		//console.log(finishedDrawing);
 	
-	res.render('/doneDrawing.html', templateData); 
+	res.redirect('/done/'); 
 }
 
-exports.doneDrawing = function(req,res) {
+exports.done = function(req,res) {
 	var templateData = {
 		skulls : skulls,
 	}
-	res.render('doneDrawing.html', templateData); 
+	res.render('done.html', templateData); 
 }
 
 

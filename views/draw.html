@@ -13,6 +13,7 @@
             document.getElementById("skullForm").submit();
             alert("saving");
         }
+        $("#saveButton").click(save);
     });
     </script>
 
@@ -20,9 +21,8 @@
 
 		<div><canvas id="canvas"></canvas></div>
 
-
 <form id="skullForm" method="POST">
 	give skull a name : <input type="text" name="skullName">
 	<input type='hidden' id= 'hiddenField' name='skullDrawing' value=''>
-	<input type="button" value="Submit" onclick="save()" />
+	<input type="button" value="Submit" id="saveButton" />
 </form>
