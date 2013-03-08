@@ -1,28 +1,31 @@
-<script type="text/javascript">
+<div id="drawPageContainer">
+    <script type="text/javascript">
 
-    $(document).ready(function() {
+        $(document).ready(function() {
 
-	//alert("document ready");
+    	//alert("document ready");
 
-        function save() {
-            var canvas  = document.getElementById("canvas");
-            //the skull lives below
-            var dataUrl = canvas.toDataURL();
-            //alert(dataUrl);
-            document.getElementById('hiddenField').value = dataUrl;
-            document.getElementById("skullForm").submit();
-            //alert("saving");
-        }
-        $("#saveButton").click(save);
-    });
-    </script>
+            function save() {
+                var canvas  = document.getElementById("canvas");
+                //the skull lives below
+                var dataUrl = canvas.toDataURL();
+                //alert(dataUrl);
+                document.getElementById('hiddenField').value = dataUrl;
+                document.getElementById("skullForm").submit();
+                //alert("saving");
+            }
+            $("#saveButton").click(save);
+        });
+        </script>
 
-<h2>draw here</h2>
+    <h2>use the whole canvas</h2>
+    <h3>or suffer the consequences</h3>
 
-		<div><canvas id="canvas"></canvas></div>
+    		<div id="canvasDrawContainer"><canvas id="canvas" width="550" height="550"></canvas></div>
 
-<form id="skullForm" method="POST">
-	give skull a name : <input type="text" name="skullName">
-	<input type='hidden' id= 'hiddenField' name='skullDrawing' value=''>
-	<input type="button" value="Submit" id="saveButton" />
-</form>
+    <form id="skullForm" method="POST">
+    	give skull a name : <input type="text" name="skullName">
+    	<input type='hidden' id= 'hiddenField' name='skullDrawing' value=''>
+    	<input type="button" value="Submit" id="saveButton" />
+    </form>
+</div>
