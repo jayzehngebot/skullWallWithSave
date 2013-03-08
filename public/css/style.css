@@ -3,10 +3,13 @@ html {
 }
 
 body {
-	padding: 50px;
+	position: absolute;
+	height: 100%;
+	width: 10000px;
+	bottom: 0;
+	padding: 0px;
 	margin: 0;
-	overflow: hidden;
-	background: black;
+	background: dimgrey;
 	color: #B3B3B3;
 	background-image: url(../images/bgTile02.png);
 }
@@ -30,4 +33,31 @@ a:link{
 
 .smallLink {
 	text-size: 10px;
+}
+
+li{
+	display: inline-block;
+}
+
+ul{
+	text-decoration: none;
+	text-indent: -30;
+	margin: 0;
+	padding: 0;
+}
+#skulls{
+	position: relative;
+	/**/
+	overflow: auto;
+	left:0;
+	bottom: 0;
+	width: 10000px;
+	height: 900px;
+}
+.column{
+	width: 1900px;
+	left:0;
+	text-indent: -30;
+	bottom: 0;
+	margin: 0;
 }
