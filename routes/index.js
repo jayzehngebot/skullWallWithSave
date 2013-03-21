@@ -74,6 +74,17 @@ exports.done = function(req,res) {
 		});
 }
 
+exports.inspired = function(req, res) {
+	
+	console.log("inspiration page requested");
+
+	var templateData = {
+		title : projectTitle,
+	}
+
+	res.render('inspired.html', templateData);
+}
+
 
 // exports.postlibs = function(req,res) {
 // 	console.log("posted a word")
