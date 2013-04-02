@@ -4,10 +4,11 @@ var Schema = mongoose.Schema;
 // define a new schema
 var skullSchema = new Schema({
     name : String,
-    skull : String
-    //slug : { type: String, lowercase: true, unique: true },
-    //stackOrder : String,
-    //lastUpdated : { type: Date, default: Date.now }
+    slug : { type: String, lowercase: true, unique: true },
+    cred : String, //person who created this skull
+    skull : String,
+    candles : Number,
+	created : { type: Date, default: Date.now }
 });
 
 // export 'Astronaut' model

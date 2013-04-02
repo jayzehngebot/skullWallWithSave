@@ -33,31 +33,45 @@ exports.postDrawing = function(req,res) {
 
 		var newSkull = new skullModel({
 		name : req.body.skullName,
-		skull : req.body.skullDrawing
+		slug : req.body.skullName.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'_'),
+		skull : req.body.skullDrawing,
+		candles : 0
 		});
 			
 		newSkull.save(function(err){
+		
+		var uniqueSkullQuery = skullModel.findOne({ slug : newSkull.slug});
+		uniqueSkullQuery.exec(function(err, foundSkull){
+
 		if (err) {
 			console.error("Error on saving new skull");
 			console.Error("err");
+
 			return res.send("There was an error when creating a new skull");
 
+		// 	//this idea is unfinished. talk to John.
+
+			//  } else if (foundSkull != null) {
+			// return res.send("unfresh Name");
+
 		} else {
+
 			console.log("Created a new skull");
 			console.log(newSkull);
 			
 			res.redirect('/done');
 		}
 
-	});
+		});
+	}); // end of .findOne query
 }
 
 exports.done = function(req,res) {
 
-	skullModel.find({}, 'skull', function(err, allSkulls) {
+	skullModel.find({}, 'skull name candles', function(err, allSkulls) {
 
 		if (err) {
-			console.error("fuck");
+			console.error("ef");
 			console.error(err);
 		}
 		if (allSkulls == null) {

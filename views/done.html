@@ -1,4 +1,4 @@
-<div id="skullDisplayContainer">
+<!-- <div id="skullDisplayContainer">
 	<div id="skulls">
 		<ul class="column">
 			{{# skulls }}
@@ -6,4 +6,29 @@
 			{{/ skulls }}
 		</ul>
 	</div>
+</div> -->
+
+
+<div id="skullDisplayContainer">
+	{{# skulls}}
+		<div class="parentSkull">
+				<div class="skullImage"><img src="{{skull}}" width="175"></div>
+				<div class="skullName"><h2>{{name}}</h2></div>
+				
+		</div>
+	{{/ skulls}}
 </div>
+
+<script>
+$(document).ready(function (){
+        // add hover event handler
+        $('.skullImage').hover(function (){
+                // find the triggering box parent, and it's tooltip child
+                $(this).parent().children('.skullName').animate(
+                    {
+                        opacity: "toggle",      // toggle opacity
+                    }
+                );
+            });
+   		 });
+</script>

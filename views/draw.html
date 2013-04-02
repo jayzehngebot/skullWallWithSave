@@ -3,18 +3,39 @@
 
         $(document).ready(function() {
 
-    	//alert("document ready");
+         // $("form").validate({
+         //    rules: {
+         //         skullName: "required",
+         //      },
+         //    messages: {
+         //        skullName: "Lettt the skull Rest in Piece. Name it, Please",
+         //     },
+         // });
+
+        // turn on validation for all forms
+          
 
             function save() {
+
+                //$("#skullForm").validate();
+
                 var canvas  = document.getElementById("canvas");
                 //the skull lives below
                 var dataUrl = canvas.toDataURL();
                 //alert(dataUrl);
                 document.getElementById('hiddenField').value = dataUrl;
-                document.getElementById("skullForm").submit();
-                //alert("saving");
+                
+                if ($('form').valid()){
+                    document.getElementById("skullForm").submit();
+                } else {
+                    alert('Name The Skull, Bonehead.');
+                    console.log('not valid, dude');
+                }
+  
             }
             $("#saveButton").click(save);
+
+
         });
         </script>
 
@@ -24,8 +45,9 @@
     		<div id="canvasDrawContainer"><canvas id="canvas" width="550" height="550"></canvas></div>
 
     <form id="skullForm" method="POST">
-    	give skull a name : <input type="text" name="skullName">
+    	give skull a name * : <input type="text" name="skullName" class="required" minlength="3" requiured>
     	<input type='hidden' id= 'hiddenField' name='skullDrawing' value=''>
     	<input type="button" value="Submit" id="saveButton" />
     </form>
+        <h3>Log in for Cred</h3>
 </div>
