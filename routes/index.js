@@ -6,6 +6,7 @@
  */
 var moment = require("moment"); // date manipulation library
 var skullModel = require('../models/skullModel.js');
+var request = require('request');
 
 exports.index = function(req, res) {
 	
@@ -99,6 +100,58 @@ exports.inspired = function(req, res) {
 	res.render('inspired.html', templateData);
 }
 
+
+exports.remote_api = function(req, res) {
+	
+	console.log("JSON data requested");
+
+	var remote_api_url = 'http://skullwall2.herokuapp.com/data/';
+	//var remote_api_url = 'http://localhost:5000/data/';
+
+	request.get(remote_api_url, function(error, response, data){
+
+		if (error){
+			res.send("error requesting skullwall api");
+		}
+
+		//convert json to native JS object
+		var apiData = JSON.parse(data);
+
+		//if apiData has property "status == OK" then success
+			if (apiData.status == 'OK'){
+				//prepare template
+
+				var templateData = {
+					skulls : apiData.skulls,
+					name : apiData.name,
+					candles : apiData.candles,
+					//rawJSON : data,
+					remote_url : remote_api_url,
+					layout : false
+				}
+				return res.render('skullwall-api.html',templateData);
+			}
+
+		})
+	};
+
+
+exports.data = function(req, res) {
+	
+	console.log("JSON data requested");
+
+	skullQuery = skullModel.find({});
+	skullQuery.exec(function(err, allSkulls){
+
+		var jsonData = {
+			status : "OK",
+			skulls : allSkulls
+		}
+
+		res.json(jsonData);
+	});
+
+}
 
 // exports.postlibs = function(req,res) {
 // 	console.log("posted a word")
