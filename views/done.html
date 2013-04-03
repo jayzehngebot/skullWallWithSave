@@ -8,7 +8,7 @@
 	</div>
 </div> -->
 
-
+<div id="skullWall">
 <div id="skullDisplayContainer">
 	{{# skulls}}
 		<div class="parentSkull">
@@ -18,9 +18,16 @@
 		</div>
 	{{/ skulls}}
 </div>
+</div>
 
 <script>
 $(document).ready(function (){
+
+
+		$("#skullWall").mousemove(function(e){
+			$("#skullWall").css('background-position',(e.pageX - 250)+'px '+(e.pageY - 250)+'px');
+		});
+
         // add hover event handler
         $('.skullImage').hover(function (){
                 // find the triggering box parent, and it's tooltip child

@@ -3,7 +3,7 @@ html {
 }
 
 body {
-cursor: url('cursors/candle.png'), pointer;
+	cursor: url('cursors/greencandle.png'), pointer;
 	position: absolute;
 	height: 100%;
 	width: 100%;
@@ -12,10 +12,17 @@ cursor: url('cursors/candle.png'), pointer;
 	margin: 0;
 	background: dimgrey;
 	color: #B3B3B3;
-	background-image: url(../images/bgTile02.png);
 	text-align: center;
 }
 
+#skullWall{
+	
+	background-image: url('cursors/candlelight.jpg');
+	background-repeat:no-repeat;
+	background-position:50% 50%;
+	text-align: center;
+
+}
 
 
 a {
