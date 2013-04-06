@@ -1,20 +1,14 @@
-<!-- <div id="skullDisplayContainer">
-	<div id="skulls">
-		<ul class="column">
-			{{# skulls }}
-				<li><img src="{{ skull }}" width="175" height="175"></li>
-			{{/ skulls }}
-		</ul>
-	</div>
-</div> -->
 
 <div id="skullWall">
 <div id="skullDisplayContainer">
 	{{# skulls}}
 		<div class="parentSkull">
+				<li class="slug">{{slug}}</li>
+				<div class="kudos"></div>
 				<div class="skullImage"><img src="{{skull}}" width="175"></div>
 				<div class="skullName"><h2>{{name}}</h2></div>
 				
+
 		</div>
 	{{/ skulls}}
 </div>
@@ -24,9 +18,12 @@
 $(document).ready(function (){
 
 
-		$("#skullWall").mousemove(function(e){
-			$("#skullWall").css('background-position',(e.pageX - 250)+'px '+(e.pageY - 250)+'px');
-		});
+		// $(".skullImage").click(function(){
+		// 	console.log("clicked");
+		// });
+		// $("#skullWall").mousemove(function(e){
+		// 	$("#skullWall").css('background-position',(e.pageX - 250)+'px '+(e.pageY - 250)+'px');
+		// });
 
         // add hover event handler
         $('.skullImage').hover(function (){
@@ -37,5 +34,9 @@ $(document).ready(function (){
                     }
                 );
             });
-   		 });
+        $('.skullImage').click(function(){
+        	var className = $(this).parent().children('.slug').text();
+        	console.log(className);
+        });
+   	});
 </script>

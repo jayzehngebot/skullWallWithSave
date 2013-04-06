@@ -16,14 +16,21 @@ body {
 }
 
 #skullWall{
-	
 	background-image: url('cursors/candlelight.jpg');
 	background-repeat:no-repeat;
 	background-position:50% 50%;
 	text-align: center;
-
 }
 
+.kudos{
+	position: absolute;
+	float: left;
+	background-image: url('kudos/00candle.gif');
+	z-index: 1;
+	visibility: visible;
+	width: 100%;
+	height: 100%;
+}
 
 a {
   color: #7FFF00;
@@ -58,6 +65,10 @@ li{
 	display: inline-block;
 }
 
+/*.parentSkull.li{
+	visibility:hidden;
+}*/
+
 ul{
 	text-decoration: none;
 	text-indent: -30;
@@ -75,17 +86,21 @@ form{
 	height: 175px;
 	display: inline-block;
 	position: relative;
+	z-index: 10;
 }
 
 .skullImage, .skullName{
-
     position: absolute;
+}
+.skullImage{
+	position: absolute;
+	z-index: 120;
 }
 
 .skullName{
 	color: black;
 	display: none;
-	z-index: 10;
+	z-index: 130;
 	opacity: .5;
 }
 

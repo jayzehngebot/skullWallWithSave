@@ -69,7 +69,7 @@ exports.postDrawing = function(req,res) {
 
 exports.done = function(req,res) {
 
-	skullModel.find({}, 'skull name candles', function(err, allSkulls) {
+	skullModel.find({}, 'slug skull name candles', function(err, allSkulls) {
 
 		if (err) {
 			console.error("ef");
@@ -79,6 +79,16 @@ exports.done = function(req,res) {
 			console.log("no skulls, sorry");
 		} else {
 			console.log("found some skulls");
+
+			for (i in allSkulls){
+				console.log(allSkulls[i].slug);
+			}
+
+	
+			//candleCount = [];
+			//grab number of candles and assign appropriate image
+			
+
 				var templateData = {
 				skulls : allSkulls
 				}
