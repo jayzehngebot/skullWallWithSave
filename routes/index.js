@@ -50,11 +50,6 @@ exports.postDrawing = function(req,res) {
 
 			return res.send("There was an error when creating a new skull");
 
-		// 	//this idea is unfinished. talk to John.
-
-			//  } else if (foundSkull != null) {
-			// return res.send("unfresh Name");
-
 		} else {
 
 			console.log("Created a new skull");
@@ -81,7 +76,7 @@ exports.done = function(req,res) {
 			console.log("found some skulls");
 
 			for (i in allSkulls){
-				console.log("slug: " + allSkulls[i].slug + " candles: " + allSkulls[i].candles);
+				console.log("slug: " + allSkulls[i].slug + " | candles: " + allSkulls[i].candles);
 			}
 
 	
