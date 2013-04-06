@@ -54,6 +54,12 @@ app.get('/inspired', routes.inspired);
 app.get('/data', routes.data);
 app.get('/api', routes.remote_api);
 
+app.get('/skulls/:skull_slug', routes.skullDetail);
+app.post('/skulls/:skull_slug/edit', routes.updateSkull);
+
+app.get('/adminsec', routes.adminsecGet);
+app.post('/adminsec', routes.adminsecPost);
+
 //app.post('/',routes.postlibs); //form POST submits here
 //app.get('/astronauts/:astro_id', routes.detail);
 // create NodeJS HTTP server using 'app'

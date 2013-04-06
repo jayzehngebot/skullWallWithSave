@@ -81,7 +81,7 @@ exports.done = function(req,res) {
 			console.log("found some skulls");
 
 			for (i in allSkulls){
-				console.log(allSkulls[i].slug);
+				console.log("slug: " + allSkulls[i].slug + " candles: " + allSkulls[i].candles);
 			}
 
 	
@@ -162,6 +162,75 @@ exports.data = function(req, res) {
 	});
 
 }
+
+
+exports.skullDetail = function(req,res){
+
+	var skullSlug = req.params.skull_slug;
+
+	var skullQuery = skullModel.findOne({slug:skullSlug});
+		skullQuery.exec(function(err, skull){
+
+			if (err) {
+				console.log('error finding skull');
+			}
+			if (skull != null){
+				var templateData = {
+					skull : skull
+				};
+
+				res.render('admin.html', templateData);
+
+			} else {
+				console.log('unable to find that skull');
+				return res.status(404).render('404.html');
+			}
+		});
+}
+
+exports.updateSkull = function(req,res){
+
+	// get slug from url
+	var skull_slug = req.params.skull_slug;
+
+	// prep form
+	var updatedData = {
+	candles : req.body.candles
+	}
+
+	// get this skull
+	skullModel.update({slug:skull_slug}, { $set: updatedData }, function(err, skull){
+
+		if (err) {
+			console.log('error on update');
+		}
+		if (skull != null){
+			res.redirect('/skulls/'+skull_slug);
+		} else {
+			console.log('unable to find' + skull +"skull");
+			return res.status(404).render('404.html');
+		}
+});
+
+}
+
+exports.adminsecGet = function(req, res) {
+	
+	console.log("admin page GET req");
+
+	skullQuery = skullModel.find({});
+	skullQuery.exec(function(err, allSkulls){
+
+		var templateData = {
+			status : "OK",
+			skulls : allSkulls
+		}
+
+		return res.render('admin.html', templateData);
+	});
+
+}
+
 
 // exports.postlibs = function(req,res) {
 // 	console.log("posted a word")

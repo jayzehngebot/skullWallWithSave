@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{Title}} Admin</title>
+</head>
+<body>
+
+		<form method="POST" action="{{skull.slug}}/edit">
+				<label for="theNameOfSkull">
+				 Name : <input type="text" name="name" id="namebox" value="{{skull.name}}" required>
+				</label>
+<br>
+				<label for="candles">
+					Candles : <input type="text" name="candles" id="candlebox" value="{{skull.candles}}">
+				</label>
+
+				<input type="submit" value="Edit Skull">
+		</form>
+	
+</body>
+</html>
