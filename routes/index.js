@@ -159,9 +159,30 @@ exports.data = function(req, res) {
 }
 
 
+exports.skullData = function(req, res) {
+	
+	console.log("Individual Skull JSON data requested");
+	var skullSlug = req.params.skull_slug;
+		console.log(skullSlug);
+
+	skullQuery = skullModel.findOne({slug:skullSlug});
+		skullQuery.exec(function(err, skull){
+
+		var jsonData = {
+			status : "OK",
+			skulls : skull
+		}
+
+		res.json(jsonData);
+	});
+
+}
+
+
 exports.skullDetail = function(req,res){
 
 	var skullSlug = req.params.skull_slug;
+
 
 	var skullQuery = skullModel.findOne({slug:skullSlug});
 		skullQuery.exec(function(err, skull){
@@ -190,7 +211,7 @@ exports.updateSkull = function(req,res){
 
 	// prep form
 	var updatedData = {
-	candles : req.body.candles
+		candles : req.body.candles
 	}
 
 	// get this skull

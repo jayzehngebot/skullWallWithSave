@@ -3,12 +3,12 @@
 <div id="skullDisplayContainer">
 	{{# skulls}}
 		<div class="parentSkull">
+            <div class="{{slug}}">
 				<li class="slug">{{slug}}</li>
 				<div class="kudos">{{candles}}</div>
 				<div class="skullImage"><img src="{{skull}}" width="175"></div>
 				<div class="skullName"><h2>{{name}}</h2></div>
-				
-
+            </div>
 		</div>
 	{{/ skulls}}
 </div>
@@ -16,8 +16,7 @@
 
 <script>
 $(document).ready(function (){
-
-
+	
 		// $(".skullImage").click(function(){
 		// 	console.log("clicked");
 		// });
@@ -34,32 +33,55 @@ $(document).ready(function (){
                     }
                 );
             });
-        $('.skullImage').click(function(){
+
+
+        $('.skullImage').click(function(e){
+            var target = $(this);
         	var skullSlug = $(this).parent().children('.slug').text();
         	var frontCandles = $(this).parent().children('.kudos').text();
         	frontCandles++;
-
+            increaseCandleCount(frontCandles);
         	console.log(skullSlug + " : " + frontCandles);
 
-        		$.ajax({
-        			url : '/skulls/'+skullSlug+'/edit',
-        			dataType : 'json',
-        			type : 'POST',
-        			data : {
-        				candles : frontCandles,
-        			},
-
-        			 success : function(response){
-        			 	console.log('candled Up');
-        			 },
-        			 error : function(err){
-        			 	console.log(err);
-        			 	console.log("something is f'd");
-        			 }
-        		});
-
-        		  $(this).parent().children('.kudos').reload();
-        		return false;
+            function increaseCandleCount(data){
+                
+                ajaxRequest(frontCandles, skullSlug, '/edit', function(result){
+                    // get ajax data for this skull, get candles, write to var, return that var to kudos
+                    $.ajax({
+                        url: '/skulls/'+skullSlug+'/data',
+                        dataType : 'json',
+                        context: this,
+                        success : function(response){
+                            console.log('updating anyways')
+                            console.log(response.skulls.candles);
+                            console.log(target);
+                            target.parent().children('.kudos').text(response.skulls.candles);
+                            
+                        }
+                    });
+                });
+            };
+                function ajaxRequest(t_candles, slug, task, callback){
+                $.ajax({
+                    url : '/skulls/'+skullSlug+task,
+                    dataType : 'json',
+                    type : 'POST',
+                    data : {
+                        candles : t_candles
+                    },
+                     success : function(data){
+                        console.log('candled Up');
+                        callback(frontCandles);
+                     },
+                     error : function(err){
+                        console.log(err);
+                        console.log("something is f'd");
+                        callback(frontCandles);
+                     }
+                  // preventDefault();
+                  // return false;
+                });
+            };
 
         });
    	});

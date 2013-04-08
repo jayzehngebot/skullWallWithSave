@@ -54,6 +54,8 @@ app.get('/inspired', routes.inspired);
 app.get('/data', routes.data);
 app.get('/api', routes.remote_api);
 
+
+app.get('/skulls/:skull_slug/data', routes.skullData);
 app.get('/skulls/:skull_slug', routes.skullDetail);
 app.post('/skulls/:skull_slug/edit', routes.updateSkull);
 
