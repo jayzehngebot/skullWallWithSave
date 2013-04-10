@@ -16,7 +16,7 @@ body {
 }
 
 #skullWall{
-	background-image: url('cursors/candlelight.jpg');
+	/*background-image: url('cursors/candlelight.jpg');*/
 	background-repeat:no-repeat;
 	background-position:50% 50%;
 	text-align: center;
@@ -30,6 +30,15 @@ body {
 	visibility: visible;
 	width: 100%;
 	height: 100%;
+	opacity: 1;
+}
+
+.kudos .candlesCount{
+	visibility: hidden;
+}
+
+.slug{
+	visibility: hidden;
 }
 
 a {

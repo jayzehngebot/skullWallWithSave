@@ -5,7 +5,7 @@
 		<div class="parentSkull">
             <div class="{{slug}}">
 				<li class="slug">{{slug}}</li>
-				<div class="kudos">{{candles}}</div>
+				<div class="kudos"><span class="candlesCount">{{candles}}</span></div>
 				<div class="skullImage"><img src="{{skull}}" width="175"></div>
 				<div class="skullName"><h2>{{name}}</h2></div>
             </div>
@@ -32,7 +32,14 @@ $(document).ready(function (){
                          $(this).css("background-image","url('css/kudos/candle02b.gif')");
                     } else if (frontCandles == 3) {
                          $(this).css("background-image","url('css/kudos/candle03b.gif')");
+                    } else if ((frontCandles > 3) && (frontCandles < 8)) {
+                         $(this).css("background-image","url('css/kudos/emerald.gif')");
+                    } else if ((frontCandles >= 8) && (frontCandles <= 15)) {
+                         $(this).css("background-image","url('css/kudos/bat.gif')");
+                    } else if (frontCandles >= 16) {
+                         $(this).css("background-image","url('css/kudos/diamond.gif')");
                     }
+
             });
         }
 
@@ -51,7 +58,21 @@ $(document).ready(function (){
                         opacity: "toggle",      // toggle opacity
                     }
                 );
+                $(this).parent().children('.kudos').animate(
+                    {
+                        opacity: .1,      // toggle opacity
+                    }
+                );
             });
+
+       $('.skullImage').mouseout(function (){
+            // find the triggering box parent, and it's tooltip child
+            $(this).parent().children('.kudos').animate(
+                {
+                    opacity: 1,      // toggle opacity
+                }
+            );
+         });
 
         // click to give candle
         $('.skullImage').click(function(e){
@@ -63,10 +84,11 @@ $(document).ready(function (){
             //CANDLING SYSTEM
             increaseCandleCount(frontCandles);
 
-            function refreshCandlesOnPage(){
-                //
-                replaceKudosNumberWithImage();
-            }
+            // function refreshCandlesOnPage(var){
+
+            //     //nothing right now
+             
+            // }
 
             function increaseCandleCount(t_candles){
                 $.ajax({
@@ -83,6 +105,7 @@ $(document).ready(function (){
                     error : function(error){
                         console.log('error on ajax');
                         target.parent().children('.kudos').text(t_candles);
+                        //fix this below.
                         //refreshCandlesOnPage();
                     }
 
