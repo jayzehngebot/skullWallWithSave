@@ -8,6 +8,11 @@ var moment = require("moment"); // date manipulation library
 var skullModel = require('../models/skullModel.js');
 var request = require('request');
 
+
+var projectTitle = "SKULLWALL";
+var textHolder = "";
+
+
 exports.index = function(req, res) {
 	
 	console.log("main page requested");
@@ -18,7 +23,6 @@ exports.index = function(req, res) {
 
 	res.render('index.html', templateData);
 }
-
 
 exports.makeDrawing = function(req,res) {
 	var templateData = {
@@ -76,7 +80,15 @@ exports.done = function(req,res) {
 			console.log("found some skulls");
 
 			for (i in allSkulls){
+				var candleIMG = [];
 				console.log("slug: " + allSkulls[i].slug + " | candles: " + allSkulls[i].candles);
+				//image for candles
+				if(allSkulls[i].candles == 3 ){
+					candleIMG[i] = 'candle03.gif';
+				} else {
+					candleIMG[i] = 'candle00.gif';
+				}
+				console.log(candleIMG[i]);
 			}
 
 	
@@ -104,7 +116,6 @@ exports.inspired = function(req, res) {
 
 	res.render('inspired.html', templateData);
 }
-
 
 exports.remote_api = function(req, res) {
 	
@@ -138,8 +149,7 @@ exports.remote_api = function(req, res) {
 			}
 
 		})
-	};
-
+}
 
 exports.data = function(req, res) {
 	
@@ -158,7 +168,6 @@ exports.data = function(req, res) {
 
 }
 
-
 exports.skullData = function(req, res) {
 	
 	console.log("Individual Skull JSON data requested");
@@ -170,14 +179,14 @@ exports.skullData = function(req, res) {
 
 		var jsonData = {
 			status : "OK",
-			skulls : skull
+			skulls : skull,
+			layout : false
 		}
 
 		res.json(jsonData);
 	});
 
 }
-
 
 exports.skullDetail = function(req,res){
 
@@ -192,7 +201,8 @@ exports.skullDetail = function(req,res){
 			}
 			if (skull != null){
 				var templateData = {
-					skull : skull
+					skull : skull,
+					layout : false
 				};
 
 				res.render('admin.html', templateData);
@@ -211,7 +221,8 @@ exports.updateSkull = function(req,res){
 
 	// prep form
 	var updatedData = {
-		candles : req.body.candles
+		candles : req.body.candles,
+		layout : false
 	}
 
 	// get this skull
@@ -226,7 +237,7 @@ exports.updateSkull = function(req,res){
 			console.log('unable to find' + skull +"skull");
 			return res.status(404).render('404.html');
 		}
-});
+	});
 
 }
 
@@ -265,9 +276,6 @@ exports.adminsecGet = function(req, res) {
 
 
 
-var projectTitle = "SKULLWALL";
-
-var textHolder = "";
 
 
 

@@ -17,14 +17,33 @@
 <script>
 $(document).ready(function (){
 	
-		// $(".skullImage").click(function(){
-		// 	console.log("clicked");
-		// });
-		// $("#skullWall").mousemove(function(e){
-		// 	$("#skullWall").css('background-position',(e.pageX - 250)+'px '+(e.pageY - 250)+'px');
-		// });
 
-        // add hover event handler
+        //get number in kudos and determine which image
+        //to replace that number
+
+        window.onload = replaceKudosNumberWithImage();
+
+        function replaceKudosNumberWithImage(){
+            $( '.kudos' ).each(function( index ) {
+                    var frontCandles = $(this).text();
+                    if (frontCandles == 1){
+                         $(this).css("background-image","url('css/kudos/candle1Stolen.gif')");
+                    } else if (frontCandles == 2) {
+                         $(this).css("background-image","url('css/kudos/candle02b.gif')");
+                    } else if (frontCandles == 3) {
+                         $(this).css("background-image","url('css/kudos/candle03b.gif')");
+                    }
+            });
+        }
+
+
+
+        //candlight trick
+    		// $("#skullWall").mousemove(function(e){
+    		// 	$("#skullWall").css('background-position',(e.pageX - 250)+'px '+(e.pageY - 250)+'px');
+    		// });
+
+        //name on hover
         $('.skullImage').hover(function (){
                 // find the triggering box parent, and it's tooltip child
                 $(this).parent().children('.skullName').animate(
@@ -34,54 +53,86 @@ $(document).ready(function (){
                 );
             });
 
-
+        // click to give candle
         $('.skullImage').click(function(e){
             var target = $(this);
         	var skullSlug = $(this).parent().children('.slug').text();
         	var frontCandles = $(this).parent().children('.kudos').text();
         	frontCandles++;
-            increaseCandleCount(frontCandles);
-        	console.log(skullSlug + " : " + frontCandles);
 
-            function increaseCandleCount(data){
-                
-                ajaxRequest(frontCandles, skullSlug, '/edit', function(result){
-                    // get ajax data for this skull, get candles, write to var, return that var to kudos
-                    $.ajax({
-                        url: '/skulls/'+skullSlug+'/data',
-                        dataType : 'json',
-                        context: this,
-                        success : function(response){
-                            console.log('updating anyways')
-                            console.log(response.skulls.candles);
-                            console.log(target);
-                            target.parent().children('.kudos').text(response.skulls.candles);
-                            
-                        }
-                    });
-                });
-            };
-                function ajaxRequest(t_candles, slug, task, callback){
+            //CANDLING SYSTEM
+            increaseCandleCount(frontCandles);
+
+            function refreshCandlesOnPage(){
+                //
+                replaceKudosNumberWithImage();
+            }
+
+            function increaseCandleCount(t_candles){
                 $.ajax({
-                    url : '/skulls/'+skullSlug+task,
+                    url : 'skulls/'+skullSlug+'/edit',
                     dataType : 'json',
                     type : 'POST',
                     data : {
                         candles : t_candles
                     },
-                     success : function(data){
-                        console.log('candled Up');
-                        callback(frontCandles);
-                     },
-                     error : function(err){
-                        console.log(err);
-                        console.log("something is f'd");
-                        callback(frontCandles);
-                     }
-                  // preventDefault();
-                  // return false;
+                    success : function(data){
+                        console.log(data);
+                        //
+                    },
+                    error : function(error){
+                        console.log('error on ajax');
+                        target.parent().children('.kudos').text(t_candles);
+                        //refreshCandlesOnPage();
+                    }
+
                 });
-            };
+            }
+
+
+
+         //    increaseCandleCount(frontCandles);
+        	// console.log(skullSlug + " : " + frontCandles);
+
+         //    function increaseCandleCount(data){
+                
+         //        ajaxRequest(frontCandles, skullSlug, '/edit', function(result){
+         //            // get ajax data for this skull, get candles, write to var, return that var to kudos
+         //            $.ajax({
+         //                url: '/skulls/'+skullSlug+'/data',
+         //                dataType : 'json',
+         //                context: this,
+         //                success : function(response){
+         //                    console.log('updating anyways')
+         //                    console.log(response.skulls.candles);
+         //                    console.log(target);
+         //                    target.parent().children('.kudos').text(response.skulls.candles);
+                            
+         //                }
+         //            });
+         //        });
+         //    };
+         //        function ajaxRequest(t_candles, slug, task, callback){
+         //        $.ajax({
+         //            url : '/skulls/'+skullSlug+task,
+         //            dataType : 'json',
+         //            type : 'POST',
+         //            data : {
+         //                candles : t_candles
+         //            },
+         //             success : function(data){
+         //                console.log('candled Up');
+         //                callback(frontCandles);
+         //             },
+         //             error : function(xhr, status, error){
+         //                console.log(xhr,status,error);
+         //                console.log("something is f'd");
+         //                callback(frontCandles);
+         //             }
+         //          // preventDefault();
+         //          // return false;
+         //        });
+         //    };
 
         });
    	});
