@@ -71,7 +71,7 @@ exports.done = function(req,res) {
 	skullModel.find({}, 'slug skull name candles', function(err, allSkulls) {
 
 		if (err) {
-			console.error("ef");
+			console.error("error on finding skulls for display");
 			console.error(err);
 		}
 		if (allSkulls == null) {
@@ -79,22 +79,18 @@ exports.done = function(req,res) {
 		} else {
 			console.log("found some skulls");
 
-			for (i in allSkulls){
-				var candleIMG = [];
-				console.log("slug: " + allSkulls[i].slug + " | candles: " + allSkulls[i].candles);
-				//image for candles
-				if(allSkulls[i].candles == 3 ){
-					candleIMG[i] = 'candle03.gif';
-				} else {
-					candleIMG[i] = 'candle00.gif';
-				}
-				console.log(candleIMG[i]);
-			}
+			// for (i in allSkulls){
+			// 	var candleIMG = [];
+			// 	//console.log("slug: " + allSkulls[i].slug + " | candles: " + allSkulls[i].candles);
+			// 	//image for candles
+			// 	if(allSkulls[i].candles == 3 ){
+			// 		candleIMG[i] = 'candle03.gif';
+			// 	} else {
+			// 		candleIMG[i] = 'candle00.gif';
+			// 	}
+			// 	console.log(candleIMG[i]);
+			// }
 
-	
-			//candleCount = [];
-			//grab number of candles and assign appropriate image
-			
 
 				var templateData = {
 				skulls : allSkulls
@@ -103,6 +99,22 @@ exports.done = function(req,res) {
 			res.render('done.html', templateData); 
 			
 			}
+		});
+}
+
+exports.forPrint = function(req, res) {
+	skullModel.find({}, 'skull name', function(err, allSkulls) {
+
+		if (err) {
+				console.error("error on finding skulls for print");
+			} else {
+
+					var templateData = {
+					skulls : allSkulls
+					}
+
+				res.render('forprint.html', templateData);
+				}
 		});
 }
 
