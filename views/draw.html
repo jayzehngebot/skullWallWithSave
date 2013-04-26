@@ -29,7 +29,16 @@
         </script>
 
     <h2>use the whole canvas</h2>
-    <h3>or suffer the consequences</h3>
+    <p>or suffer serious consequences<p>
+
+    {{#currentUser}}
+        <h3>This Skull will be Credited to : <span class="currentUser">{{currentUser.username}} * </span></h3>
+    {{/currentUser}}
+    {{^currentUser}}
+
+        <h3><a href="/register">Join the Skull Klub</a> - then you can - <a href="/login">Sign in & Win</a></h3>
+
+    {{/currentUser}}
 
     		<div id="canvasDrawContainer"><canvas id="canvas" width="550" height="550"></canvas></div>
 
@@ -39,15 +48,8 @@
          <input type='hidden' id= 'cred' name='cred' value=''>
     	<input type="button" value="Submit" id="saveButton" />
     </form>
-
-        {{#currentUser}}
-            <h3>This Skull will be Credited to : <span class="currentUser">{{currentUser.username}}</span></h3><br>Not Interested in Attribution ? <a class="smallLink" href="/logout"> Sign Out</a>
-        {{/currentUser}}
-        {{^currentUser}}
-
-            <h3><a href="/register">Join the Skull Klub</a> - then you can - <a href="/login">Log in and Win Respect</a></h3>
-            
-        {{/currentUser}}
-
+    {{ #currentUser }}
+        <p>* Not Interested in Attribution ? <a class="smallLink" href="/logout"> Sign Out</a> Before Drawing</p>
+    {{ /currentUser }}
 
 </div>
