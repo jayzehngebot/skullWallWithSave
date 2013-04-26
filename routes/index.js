@@ -7,6 +7,7 @@
 var moment = require("moment"); // date manipulation library
 var skullModel = require('../models/skullModel.js');
 var request = require('request');
+var user = require('../models/user.js'); 
 
 
 var projectTitle = "SKULLWALL";
@@ -40,6 +41,7 @@ exports.postDrawing = function(req,res) {
 		name : req.body.skullName,
 		slug : req.body.skullName.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'_'),
 		skull : req.body.skullDrawing,
+		cred : req.body.cred,
 		candles : 0
 		});
 			
@@ -102,21 +104,6 @@ exports.done = function(req,res) {
 		});
 }
 
-exports.forPrint = function(req, res) {
-	skullModel.find({}, 'skull name', function(err, allSkulls) {
-
-		if (err) {
-				console.error("error on finding skulls for print");
-			} else {
-
-					var templateData = {
-					skulls : allSkulls
-					}
-
-				res.render('forprint.html', templateData);
-				}
-		});
-}
 
 exports.inspired = function(req, res) {
 	
@@ -253,22 +240,41 @@ exports.updateSkull = function(req,res){
 
 }
 
-exports.adminsecGet = function(req, res) {
+
+exports.loginSuccess = function(req,res){
 	
-	console.log("admin page GET req");
-
-	skullQuery = skullModel.find({});
-	skullQuery.exec(function(err, allSkulls){
-
-		var templateData = {
-			status : "OK",
-			skulls : allSkulls
+		var templateData ={
+			status: "OK",
 		}
-
-		return res.render('admin.html', templateData);
-	});
+	return res.render('login-success.html', templateData);
 
 }
+
+
+exports.userMakeDrawing = function(req,res) {
+	var templateData = {
+		updatedText : textHolder,
+		currentUser : req.user
+	}
+	res.render('draw.html', templateData); 
+}
+
+// exports.adminsecGet = function(req, res) {
+	
+// 	console.log("admin page GET req");
+
+// 	skullQuery = skullModel.find({});
+// 	skullQuery.exec(function(err, allSkulls){
+
+// 		var templateData = {
+// 			status : "OK",
+// 			skulls : allSkulls
+// 		}
+
+// 		return res.render('admin.html', templateData);
+// 	});
+
+// }
 
 
 // exports.postlibs = function(req,res) {

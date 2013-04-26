@@ -3,27 +3,16 @@
 
         $(document).ready(function() {
 
-         // $("form").validate({
-         //    rules: {
-         //         skullName: "required",
-         //      },
-         //    messages: {
-         //        skullName: "Lettt the skull Rest in Piece. Name it, Please",
-         //     },
-         // });
-
-        // turn on validation for all forms
-          
 
             function save() {
-
-                //$("#skullForm").validate();
-
+                
+                var currentUser = $('.currentUser').text();
                 var canvas  = document.getElementById("canvas");
                 //the skull lives below
                 var dataUrl = canvas.toDataURL();
                 //alert(dataUrl);
                 document.getElementById('hiddenField').value = dataUrl;
+                document.getElementById('cred').value = currentUser;
                 
                 if ($('form').valid()){
                     document.getElementById("skullForm").submit();
@@ -44,10 +33,21 @@
 
     		<div id="canvasDrawContainer"><canvas id="canvas" width="550" height="550"></canvas></div>
 
-    <form id="skullForm" method="POST">
-    	give skull a name * : <input type="text" name="skullName" class="required" minlength="3" requiured>
+    <form class="skullForm" id="skullForm" method="POST">
+    	Name Your Skull : <input type="text" name="skullName" class="required" minlength="3" requiured>
     	<input type='hidden' id= 'hiddenField' name='skullDrawing' value=''>
+         <input type='hidden' id= 'cred' name='cred' value=''>
     	<input type="button" value="Submit" id="saveButton" />
     </form>
-        <h3>Log in for Cred</h3>
+
+        {{#currentUser}}
+            <h3>This Skull will be Credited to : <span class="currentUser">{{currentUser.username}}</span></h3><br>Not Interested in Attribution ? <a class="smallLink" href="/logout"> Sign Out</a>
+        {{/currentUser}}
+        {{^currentUser}}
+
+            <h3><a href="/register">Join the Skull Club</a> - then you can - <a href="/login">Log in and Win Respect</a></h3>
+            
+        {{/currentUser}}
+
+
 </div>

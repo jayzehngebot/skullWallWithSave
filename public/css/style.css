@@ -42,8 +42,23 @@ body {
 }
 
 a {
+  text-decoration: none;
   color: #7FFF00;
+  line-height : 10px;
 }
+
+#addLink{
+	display: inline-block;
+}
+
+.addLink{
+	display: inline-block;
+	position: relative;
+	top: 80px;
+	font-size: 300px;
+	margin-left : 10px;
+}
+
 
 h1 {
 	text-align: right;
@@ -54,17 +69,23 @@ h1 {
    -webkit-text-stroke-color: #FFFFF0;
 }
 
+
+
+.headerLink {
+	font-size: 90px;
+}
+
 h2 {
 	padding-top: 0px;
 	padding-bottom: 0px;
 	line-height: 3px;
 }
 h3 {
-	padding-top: -13px;
+/*	padding-top: 10px;*/
 }
-a:link{
+/*a:link{
 	font-size: 30px;
-}
+}*/
 
 .smallLink {
 	text-size: 10px;
@@ -130,6 +151,10 @@ form{
 	text-indent: -30;
 	bottom: 0;
 	margin: 0;
+}
+
+.skullForm{
+	font-size: 30px;
 }
 
 #canvasDrawContainer{

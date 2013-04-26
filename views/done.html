@@ -1,6 +1,7 @@
 
 <div id="skullWall">
 <div id="skullDisplayContainer">
+    <div id="addLink"><a class="addLink" href="/draw">&#43;</a></div>
 	{{# skulls}}
 		<div class="parentSkull">
             <div class="{{slug}}">
@@ -111,51 +112,6 @@ $(document).ready(function (){
 
                 });
             }
-
-
-
-         //    increaseCandleCount(frontCandles);
-        	// console.log(skullSlug + " : " + frontCandles);
-
-         //    function increaseCandleCount(data){
-                
-         //        ajaxRequest(frontCandles, skullSlug, '/edit', function(result){
-         //            // get ajax data for this skull, get candles, write to var, return that var to kudos
-         //            $.ajax({
-         //                url: '/skulls/'+skullSlug+'/data',
-         //                dataType : 'json',
-         //                context: this,
-         //                success : function(response){
-         //                    console.log('updating anyways')
-         //                    console.log(response.skulls.candles);
-         //                    console.log(target);
-         //                    target.parent().children('.kudos').text(response.skulls.candles);
-                            
-         //                }
-         //            });
-         //        });
-         //    };
-         //        function ajaxRequest(t_candles, slug, task, callback){
-         //        $.ajax({
-         //            url : '/skulls/'+skullSlug+task,
-         //            dataType : 'json',
-         //            type : 'POST',
-         //            data : {
-         //                candles : t_candles
-         //            },
-         //             success : function(data){
-         //                console.log('candled Up');
-         //                callback(frontCandles);
-         //             },
-         //             error : function(xhr, status, error){
-         //                console.log(xhr,status,error);
-         //                console.log("something is f'd");
-         //                callback(frontCandles);
-         //             }
-         //          // preventDefault();
-         //          // return false;
-         //        });
-         //    };
 
         });
    	});
