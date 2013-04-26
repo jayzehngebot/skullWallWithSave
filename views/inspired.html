@@ -9,6 +9,17 @@ $(function() {
 </script>-->
 
 <center>
+
+    	{{#photos}}
+    	
+    	<a href="/photo/{{_id}}">
+    		<img src="https://s3.amazonaws.com/skullsIRL/{{image}}" width="300" title="{{title}}">
+    	</a>
+	
+    	{{/photos}}
+
+
+
 	<hr>
 <p>
 <iframe width="640" height="480" src="http://www.youtube.com/embed/eShQsiVPIcA" frameborder="0" allowfullscreen></iframe></p>

@@ -99,9 +99,11 @@ app.get('/success', account.ensureAuthenticated, routes.loginSuccess);
 
 app.get('/logout', account.logout);
 
+app.get('/irlskull', routes.irlskullForm);
+app.post('/irlskull', routes.new_irlskull);
 
 
-// Turn the server on!
+// Turn server on
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
   console.log("Listening on " + port);
