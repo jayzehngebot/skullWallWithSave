@@ -12,6 +12,7 @@ SKULLWALL is the Internet Catacombs
 Developed by The Real Jay Z in 2013
 
 Much thanks to John Schimmel & ITP
+```
 
          _,.-------.,_
      ,;~'             '~;, 
@@ -36,3 +37,5 @@ Much thanks to John Schimmel & ITP
        \   .       .   /
          \.    ^    ./   
            ^~~~^~~~^ 
+
+```
