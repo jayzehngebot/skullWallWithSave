@@ -11,21 +11,20 @@ var express = require('express')
   , passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
-// the ExpressJS App
+// ExpressJS App
 var app = express();
 
 // configuration of port, templates (/views), static files (/public)
 // and other expressjs settings for the web server.
 app.configure(function(){
 
-    // database - skipping until week 5
+    // MongoDB
   app.db = mongoose.connect(process.env.MONGOLAB_URI);
 
-
-  //  templates directory to 'views'
+  //  Set templates for 'views'
   app.set('views', __dirname + '/views');
 
-  // setup template engine - we're using Hogan-Express
+  // setup template engine - Hogan-Express
   app.set('view engine', 'html');
   app.set('layout','layout');
   app.engine('html', require('hogan-express')); // https://github.com/vol4ok/hogan-express
@@ -101,6 +100,9 @@ app.get('/logout', account.logout);
 
 app.get('/irlskull', routes.irlskullForm);
 app.post('/irlskull', routes.new_irlskull);
+
+app.get('/photoAdmin', account.ensureAuthenticated, routes.photoAdmin);
+app.post('/photoAdmin/:image/edit', account.ensureAuthenticated, routes.photoEdit);
 
 
 // Turn server on

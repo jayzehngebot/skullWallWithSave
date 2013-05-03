@@ -15,6 +15,19 @@ body {
 	text-align: center;
 }
 
+.contribute {
+	line-height: 100%;
+	padding-top: 60px;
+	font-size: 30px;
+}
+
+hr {
+	height: 124px;
+	width: 1229px;
+	background-image: url('img/skullwall-hr.png');
+	border: 0px;
+}
+
 #skullWall{
 	/*background-image: url('cursors/candlelight.jpg');*/
 	background-repeat:no-repeat;
@@ -54,8 +67,8 @@ a {
 .addLink{
 	display: inline-block;
 	position: relative;
-	top: 80px;
-	font-size: 300px;
+	top: 40px;
+	font-size: 150px;
 	margin-left : 10px;
 }
 
@@ -113,10 +126,12 @@ form{
 
 
 .parentSkull{
-	width: 175px;
-	height: 175px;
-	display: inline-block;
 	position: relative;
+	margin-left: -3px;
+	margin-bottom: -3px;
+	width: 75px;
+	height: 75px;
+	display: inline-block;
 	z-index: 10;
 }
 
@@ -124,15 +139,20 @@ form{
     position: absolute;
 }
 .skullImage{
-	position: absolute;
 	z-index: 120;
 }
 
 .skullName{
-	color: black;
+	padding: 3px;
+	position: absolute;
+	top: -9px;
+	background-color:black;
+	font-size: 9px;
+	line-height: 200%;
+	color: white;
 	display: none;
 	z-index: 130;
-	opacity: .5;
+	opacity: 1;
 }
 
 
@@ -140,7 +160,6 @@ form{
 #skulls{
 	color
 	position: relative;
-	/**/
 	overflow: auto;
 	left:0;
 	bottom: 0;

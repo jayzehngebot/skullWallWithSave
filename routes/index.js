@@ -93,19 +93,6 @@ exports.done = function(req,res) {
 		} else {
 			console.log("found some skulls");
 
-			// for (i in allSkulls){
-			// 	var candleIMG = [];
-			// 	//console.log("slug: " + allSkulls[i].slug + " | candles: " + allSkulls[i].candles);
-			// 	//image for candles
-			// 	if(allSkulls[i].candles == 3 ){
-			// 		candleIMG[i] = 'candle03.gif';
-			// 	} else {
-			// 		candleIMG[i] = 'candle00.gif';
-			// 	}
-			// 	console.log(candleIMG[i]);
-			// }
-
-
 				var templateData = {
 				skulls : allSkulls
 				}
@@ -255,11 +242,24 @@ exports.updateSkull = function(req,res){
 
 	// get slug from url
 	var skull_slug = req.params.skull_slug;
+	var deleteThis = req.body.deleteThis;
 
 	// prep form
 	var updatedData = {
 		candles : req.body.candles,
 		layout : false
+	}
+
+	console.log('begin updating skull');
+
+	if (deleteThis === 'true'){
+		console.log('so you want me to delete this guy : '+ skull_slug);
+		skullModel.remove({slug:skull_slug}, function(err){
+			if (err){
+				console.log('error removing '+ skull_slug);
+			} 
+		});
+
 	}
 
 	// get this skull
@@ -268,8 +268,22 @@ exports.updateSkull = function(req,res){
 		if (err) {
 			console.log('error on update');
 		}
+		// else if ((skull != null) && (deleteThis === true)){
+		// 	console.log('you want me to delete this skull : '+ skull_slug);
+			
+		// 	skullModel.remove({slug:skull_slug}, function(err){
+		// 		if (err) {
+		// 			console.log('error removing skull : '+ skull_slug);
+		// 			res.send('error removing skull :'+ skull_slug);
+		// 		} 
+		// 		console.log(skull_slug + " has been removed");
+		// 		res.redirect('/');
+		// 	});
+
 		if (skull != null){
-			res.redirect('/skulls/'+skull_slug);
+			res.redirect('/skulls/'+skull_slug);{
+		}
+			
 		} else {
 			console.log('unable to find' + skull +"skull");
 			return res.status(404).render('404.html');
@@ -365,10 +379,58 @@ exports.new_irlskull = function(req, res){
 
   });
 
-};
+}
+
+exports.photoAdmin = function(req, res){
+
+
+		Photo.find({}, 'image', function(err, allPhotos) {
+
+		if (err) {
+			console.error("error on finding photos for admin display");
+			console.error(err);
+		}
+		if (allPhotos == null) {
+			console.log("no photos, sorry");
+		} else {
+			console.log("found some photos");
+
+				var templateData = {
+				photos : allPhotos
+				}
+			res.render('photoAdmin.html', templateData); 
+			}
+
+		});
+
+	}
+
+
+exports.photoEdit = function(req,res){
+
+	photo = req.params.image;
+	console.log('the photo to be deleted is ' + photo);
+
+	Photo.remove({image:photo}, function(err){
+			if (err){
+				console.log('error removing '+ image);
+			} else {
+			console.log("removed a photo ");
+
+			}
+		});
+
+	Photo.find({}, 'image', function(err, allPhotos) {
+
+				var templateData = {
+				photos : allPhotos
+				}
+			res.render('photoAdmin.html', templateData); 
+		});
+}
+
 
 var cleanFileName = function(filename) {
-    
 
     fileParts = filename.split(".");
     
