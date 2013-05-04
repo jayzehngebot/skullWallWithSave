@@ -2,6 +2,8 @@
 
 * Admin page - add stuff like delete(done), name check stuff
 
+* show rules on hover <-- rules are 1. Must Contain Skull 2. No Pure Writing 3. No Hate
+
 * Sort skulls by kudos
 * Add more types of Kudos, including White Lotus
 * candleCount refresh on kudos add

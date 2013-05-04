@@ -79,6 +79,8 @@ h1 {
 	opacity:.3; 
 	font-size: 90px;
 	font-weight: 10px;
+	margin: 15px;
+	padding: 15px;
    -webkit-text-stroke-width: .25px;
    -webkit-text-stroke-color: #FFFFF0;
 }
