@@ -2,9 +2,6 @@
 
 * Admin page - add stuff like delete(done), name check stuff
 
-* Add anon user passport strategy
-
-* fixx adding when logged in vs adding when not
 * Sort skulls by kudos
 * Add more types of Kudos, including White Lotus
 * candleCount refresh on kudos add
@@ -24,10 +21,7 @@
 
 // questions & notes to self : 
 
-* best way to handle intentionally shrinking imags?
-
-* difference between logged in and not logged in routes?
-aka Eliminate weird redundancies?
+* best way to handle shrinking dataURL's to images?
 
 * best way to handle relationship between user account and login / pw stuff?
 
@@ -38,8 +32,10 @@ aka Eliminate weird redundancies?
 
  // SKULLWALL =+=  now done: 
 
- * barebones photo admin page
+ * fixed ajax oddness with candling system ajax skullUpdate call and ajax returning error
+ * barebones photo admin page <-- weird problem here
  * SkullName Hover Font Line Spacing Wonkyness
+ * Add anon user passport strategy <-- addresses dumb redundancies with routes
  * custom horizontal rules
  * cuztom skull "favorite icon" favicon
  * Reconsider size of skull in wall

@@ -80,30 +80,31 @@ $(document).ready(function (){
 
         // click to give candle
         $('.skullImage').click(function(e){
+            console.log('skull clicked');
             var target = $(this);
         	var skullSlug = $(this).parent().children('.slug').text();
         	var frontCandles = $(this).parent().children('.kudos').text();
         	frontCandles++;
 
+            //if user is anon and they've done this three times
+            //prompt them to join skullKlub
+
             //CANDLING SYSTEM
             increaseCandleCount(frontCandles);
 
-            // function refreshCandlesOnPage(var){
-
-            //     //nothing right now
-             
-            // }
 
             function increaseCandleCount(t_candles){
                 $.ajax({
                     url : 'skulls/'+skullSlug+'/edit',
-                    dataType : 'json',
+                    //dataType : 'json',
                     type : 'POST',
                     data : {
                         candles : t_candles
                     },
                     success : function(data){
-                        console.log(data);
+                        console.log('success on ajax');
+                        target.parent().children('.kudos').text(t_candles);
+
                         //
                     },
                     error : function(error){

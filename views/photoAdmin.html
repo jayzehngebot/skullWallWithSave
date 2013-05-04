@@ -15,32 +15,16 @@
     	{{#photos}}
     	<div id="photoBloc">
     		<form method="POST" action="/photoAdmin/{{_id}}/edit">
-    		<img src="https://s3.amazonaws.com/skullsIRL/{{image}}" width="300" title="{{title}}"><br>
-			<label for="delete">
-				Delete Photo : <input type="checkbox" name="deleteThis" value="true">
-			</label>
-			<input type="submit" value="Delete">
+	    		<img src="https://s3.amazonaws.com/skullsIRL/{{image}}" width="300" title="{{title}}"><br>
+				<label for="delete">
+					Delete Photo : <input type="checkbox" name="deleteThis" value="true">
+				</label>
+				<input type="submit" value="Delete">
+			</form>
 		</div>
     	{{/photos}}
 
 
-
-
-<!-- 		<form method="POST" action="{{skull.slug}}/edit">
-				<label for="theNameOfSkull">
-				 Name : <input type="text" name="name" id="namebox" value="{{skull.name}}" required>
-				</label>
-<br>
-				<label for="candles">
-					Candles : <input type="text" name="candles" id="candlebox" value="{{skull.candles}}">
-				</label>
-
-				<label for="delete">
-				Delete Skull : <input type="checkbox" name="deleteThis" value="true">
-				</label>
-
-				<input type="submit" value="Edit Skull">
-		</form> -->
 	
 </body>
 </html>

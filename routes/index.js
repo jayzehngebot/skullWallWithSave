@@ -132,7 +132,7 @@ exports.inspired =  function(req,res){
 
     } else {
 
-      console.log(photos);
+      //console.log(photos);
       templateData = {
         title : 'SkullSpiration',
         photos : photos
@@ -142,8 +142,7 @@ exports.inspired =  function(req,res){
 		      // res.json({ username: req.user.username, email: req.user.email });
 		      templateData["currentUser"] = req.user.username;
 		    } else {
-		      //res.json({ anonymous: true });
-		      console.log('user is anon');
+		      //console.log('user is anon');
 		    }
 
  
@@ -416,6 +415,8 @@ exports.photoEdit = function(req,res){
 
 	Photo.findById(photo_id,function(err,photo){
 
+		console.log('grabbed image named : '+ photo.title);
+
 		if (err){
 			console.error(err);
 			res.send("unable to find this picture");
@@ -427,7 +428,7 @@ exports.photoEdit = function(req,res){
 						console.error("error removing image from mongoDb");
 						res.send('unable to remove photo from mogngo');
 					}
-					res.redirect('/');
+					res.redirect('/inspired');
 				})
 			});
 		}
@@ -435,28 +436,6 @@ exports.photoEdit = function(req,res){
 	});
 
 }
-
-
-	// Photo.remove({title:photo}, function(err){
-	// 		if (err){
-	// 			console.log('error removing '+ image);
-	// 		} else {
-	// 		console.log("removed a photo ");
-
-	// 		}
-	// 	});
-
-	// Photo.find({}, 'image', function(err, allPhotos) {
-
-	// 			var templateData = {
-	// 			photos : allPhotos
-	// 			}
-	// 		res.render('photoAdmin.html', templateData); 
-	// 	});
-
-
-
-
 
 var cleanFileName = function(filename) {
 
