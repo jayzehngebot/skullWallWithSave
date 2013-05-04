@@ -3,8 +3,15 @@
     <p>To See the {{ title }}, First You Must<p>
     <p><a class="contribute" href="/draw">Contribute to {{ title }}</a></p>
     <hr>
+
+    {{#currentUser}}
+        <h3>You are Logged in as : <span class="currentUser">{{currentUser}}</span></h3>
+    {{/currentUser}}
+    {{^currentUser}}
     <p>for Cred & Perks,</p>
 
     <p><a href="/register" class="smallLink">Join Skull Klub</a> - and - <a href="/login" class="smallLink">Sign In</a></p>
+
+    {{/currentUser}}
     <hr>
     <a href="/inspired" class="smallLink">Do you need some Inspiration?</a>

@@ -34,6 +34,15 @@ exports.index = function(req, res) {
 		title : projectTitle,
 	}
 
+	if (req.user) {
+      // res.json({ username: req.user.username, email: req.user.email });
+      console.log('user is logged in as :'+ req.user.username);
+      templateData["currentUser"] = req.user.username;
+    } else {
+      //res.json({ anonymous: true });
+      console.log('user is anon');
+    }
+
 	res.render('index.html', templateData);
 }
 
@@ -408,26 +417,52 @@ exports.photoAdmin = function(req, res){
 
 exports.photoEdit = function(req,res){
 
-	photo = req.params.image;
-	console.log('the photo to be deleted is ' + photo);
+	var photo_id = req.params.photo_id;
 
-	Photo.remove({image:photo}, function(err){
-			if (err){
-				console.log('error removing '+ image);
-			} else {
-			console.log("removed a photo ");
+	console.log('the photo to be deleted is ' + photo_id);
 
-			}
-		});
+	Photo.findById(photo_id,function(err,photo){
 
-	Photo.find({}, 'image', function(err, allPhotos) {
+		if (err){
+			console.error(err);
+			res.send("unable to find this picture");
+		} else {
+			s3.client.deleteObject({Bucket: 'skullsIRL', Key: photo.image}, function(err,data){
+				console.log(err,data);
+				photo.remove(function(err){
+					if (err) {
+						console.error("error removing image from mongoDb");
+						res.send('unable to remove photo from mogngo');
+					}
+					res.redirect('/');
+				})
+			});
+		}
 
-				var templateData = {
-				photos : allPhotos
-				}
-			res.render('photoAdmin.html', templateData); 
-		});
+	});
+
 }
+
+
+	// Photo.remove({title:photo}, function(err){
+	// 		if (err){
+	// 			console.log('error removing '+ image);
+	// 		} else {
+	// 		console.log("removed a photo ");
+
+	// 		}
+	// 	});
+
+	// Photo.find({}, 'image', function(err, allPhotos) {
+
+	// 			var templateData = {
+	// 			photos : allPhotos
+	// 			}
+	// 		res.render('photoAdmin.html', templateData); 
+	// 	});
+
+
+
 
 
 var cleanFileName = function(filename) {

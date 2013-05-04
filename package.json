@@ -12,7 +12,8 @@
     "passport-local": "0.1.x",
     "passport-local-mongoose": "0.2.0",
     "connect-mongodb" : "1.1.5",
-    "aws-sdk" : "v0.9.8-pre.9"
+    "aws-sdk" : "v0.9.8-pre.9",
+    "passport-anonymous": ">= 0.0.0"
   },
 
   "engines" : {

@@ -14,7 +14,7 @@
 
     	{{#photos}}
     	<div id="photoBloc">
-    		<form method="POST" action="/photoAdmin/{{image}}/edit">
+    		<form method="POST" action="/photoAdmin/{{_id}}/edit">
     		<img src="https://s3.amazonaws.com/skullsIRL/{{image}}" width="300" title="{{title}}"><br>
 			<label for="delete">
 				Delete Photo : <input type="checkbox" name="deleteThis" value="true">

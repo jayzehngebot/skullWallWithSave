@@ -2,6 +2,9 @@
 
 * Admin page - add stuff like delete(done), name check stuff
 
+* Add anon user passport strategy
+
+* fixx adding when logged in vs adding when not
 * Sort skulls by kudos
 * Add more types of Kudos, including White Lotus
 * candleCount refresh on kudos add
@@ -35,6 +38,7 @@ aka Eliminate weird redundancies?
 
  * SKULLWALL =+=  now done: 
 
+ * barebones photo admin page
  * SkullName Hover Font Line Spacing Wonkyness
  * custom horizontal rules
  * cuztom skull "favorite icon" favicon

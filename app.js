@@ -9,7 +9,8 @@ var express = require('express')
   , mongoose = require('mongoose')
   , mongoStore = require('connect-mongodb')
   , passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
+  , LocalStrategy = require('passport-local').Strategy
+  , AnonymousStrategy = require('passport-anonymous').Strategy;
 
 // ExpressJS App
 var app = express();
@@ -64,13 +65,14 @@ var User = require('./models/user.js');
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+passport.use(new AnonymousStrategy());
 
 // ROUTES
 var routes = require('./routes/index.js');
 var account = require('./routes/accounts.js');
 
 
-app.get('/', routes.index);
+app.get('/', passport.authenticate(['local','anonymous']), routes.index);
 
 app.get('/draw', routes.makeDrawing);
 app.post('/draw', routes.postDrawing);
@@ -81,7 +83,7 @@ app.get('/api', routes.remote_api);
 
 // login GET + POST
 app.get('/login', account.login);
-app.post('/login', passport.authenticate('local'), account.login_post);
+app.post('/login', passport.authenticate(['local','anonymous']), account.login_post);
 
 // register GET + POST
 app.get('/register', account.register);
@@ -102,7 +104,7 @@ app.get('/irlskull', routes.irlskullForm);
 app.post('/irlskull', routes.new_irlskull);
 
 app.get('/photoAdmin', account.ensureAuthenticated, routes.photoAdmin);
-app.post('/photoAdmin/:image/edit', account.ensureAuthenticated, routes.photoEdit);
+app.post('/photoAdmin/:photo_id/edit', routes.photoEdit);
 
 
 // Turn server on
