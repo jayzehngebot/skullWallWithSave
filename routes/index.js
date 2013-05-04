@@ -50,6 +50,12 @@ exports.makeDrawing = function(req,res) {
 	var templateData = {
 		updatedText : textHolder
 	}
+
+	if (req.user) {
+      // add currentUser to template Data
+      templateData["currentUser"] = req.user.username;
+    } 
+
 	res.render('draw.html', templateData); 
 }
 
@@ -113,18 +119,6 @@ exports.done = function(req,res) {
 }
 
 
-// exports.inspired = function(req, res) {
-	
-// 	console.log("inspiration page requested");
-
-// 	var templateData = {
-// 		title : projectTitle,
-// 	}
-
-// 	res.render('inspired.html', templateData);
-// }
-
-
 exports.inspired =  function(req,res){
 
   // query for all images
@@ -142,7 +136,17 @@ exports.inspired =  function(req,res){
       templateData = {
         title : 'SkullSpiration',
         photos : photos
-      };
+        }
+
+		if (req.user) {
+		      // res.json({ username: req.user.username, email: req.user.email });
+		      templateData["currentUser"] = req.user.username;
+		    } else {
+		      //res.json({ anonymous: true });
+		      console.log('user is anon');
+		    }
+
+ 
 
       res.render("inspired.html", templateData);
 
@@ -277,17 +281,6 @@ exports.updateSkull = function(req,res){
 		if (err) {
 			console.log('error on update');
 		}
-		// else if ((skull != null) && (deleteThis === true)){
-		// 	console.log('you want me to delete this skull : '+ skull_slug);
-			
-		// 	skullModel.remove({slug:skull_slug}, function(err){
-		// 		if (err) {
-		// 			console.log('error removing skull : '+ skull_slug);
-		// 			res.send('error removing skull :'+ skull_slug);
-		// 		} 
-		// 		console.log(skull_slug + " has been removed");
-		// 		res.redirect('/');
-		// 	});
 
 		if (skull != null){
 			res.redirect('/skulls/'+skull_slug);{

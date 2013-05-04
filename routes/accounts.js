@@ -23,7 +23,7 @@ exports.login = function(req, res) {
 
 // Login post
 exports.login_post = function(req, res) {
-	res.redirect('/write');
+	res.redirect('/draw');
 };
 
 // logout
@@ -42,7 +42,7 @@ exports.register_post = function(req, res) {
 		return res.render('accounts/register.html');
 	} else {
 
-        User.register(new User({ username : req.body.username }), req.body.password, function(err, new_user) {
+        User.register(new User({ username : req.body.username, email : req.body.email}), req.body.password, function(err, new_user) {
             if (err) {
                 return res.render('accounts/register.html');
             }

@@ -1,39 +1,37 @@
-<!--<script>
-$(function() {
-  $('#undersea').lake({
-    'speed': .25,
-    'scale': .33,
-    'waves': 10
-  });
-});
-</script>-->
 
 <center>
 
-    	{{#photos}}
-    	
-    		<img src="https://s3.amazonaws.com/skullsIRL/{{image}}" width="300" title="{{title}}">
+      {{#currentUser}}
+        <h2>Skull Klub Members, <a href="/irlskull">Post Skull Spottings</a></h2>
+      {{/currentUser}}
+      <br>
 
+    	{{#photos}}
+      <div class="photoBloc">
+    		<img src="https://s3.amazonaws.com/skullsIRL/{{image}}" width="300" title="{{title}}">
+      </div>
     	{{/photos}}
 
 
 
 	<hr>
-<p>
-<iframe width="640" height="480" src="http://www.youtube.com/embed/eShQsiVPIcA" frameborder="0" allowfullscreen></iframe></p>
+
+<p><iframe width="640" height="480" src="http://www.youtube.com/embed/eShQsiVPIcA" frameborder="0" allowfullscreen></iframe></p>
 
 <hr>
+
 <br>
 ^ Documentation of 3-D Visualization Conducted by the Friends of Capt. Karl Ward and the Research Wing of the Office of Creative Development (OCD) ^
 <br>
 
 <hr>
+
 Feeling ultra-inspired? SkullWall has spawned a JSON API.<br>
 <a href="/data"> view raw JSON data<a><br>
 <a href="/api"> view sparse example API usage<a><br>
-	<hr>
+	
+  <hr>
 
-   <!-- <img id="undersea" src="/images/livingWorld.jpg" style="display: none;"/>-->
+<p>Alternatively, <a href="http://www.irlexp.com">visit my plog, IRLEXP</a>.</p>
 
-   <p>Alternatively, <a href="http://www.irlexp.com">visit my plog, IRLEXP</a>.</p>
 </center>

@@ -72,39 +72,48 @@ var routes = require('./routes/index.js');
 var account = require('./routes/accounts.js');
 
 
+// INDEX
 app.get('/', passport.authenticate(['local','anonymous']), routes.index);
 
-app.get('/draw', routes.makeDrawing);
+
+// TRIUMVERATE 
+app.get('/draw', passport.authenticate(['local','anonymous']), routes.makeDrawing);
 app.post('/draw', routes.postDrawing);
 app.get('/done', routes.done);
-app.get('/inspired', routes.inspired);
-app.get('/data', routes.data);
-app.get('/api', routes.remote_api);
 
-// login GET + POST
+
+//PHOTO BUCKET & INSPIRATION BOARD
+app.get('/inspired', passport.authenticate(['local','anonymous']), routes.inspired);
+app.get('/irlskull', routes.irlskullForm);
+app.post('/irlskull', routes.new_irlskull);
+app.get('/photoAdmin', account.ensureAuthenticated, routes.photoAdmin);
+app.post('/photoAdmin/:photo_id/edit', routes.photoEdit);
+
+
+// LOGIN
 app.get('/login', account.login);
 app.post('/login', passport.authenticate(['local','anonymous']), account.login_post);
 
-// register GET + POST
+// REGISTRATION
 app.get('/register', account.register);
 app.post('/register', account.register_post);
+app.get('/success', account.ensureAuthenticated, routes.loginSuccess);
+app.get('/logout', account.logout);
 
+
+// THIS IS REDUNDANT. DESTROY IT
 app.get('/write', account.ensureAuthenticated, routes.userMakeDrawing);
 app.post('/write', account.ensureAuthenticated, routes.postDrawing);
 
+// EDIT INDIVIDUAL SKULL INFO 
 app.get('/skulls/:skull_slug/data', routes.skullData);
 app.get('/skulls/:skull_slug', routes.skullDetail);
 app.post('/skulls/:skull_slug/edit', routes.updateSkull);
 
-app.get('/success', account.ensureAuthenticated, routes.loginSuccess);
+// RAW DATA AND API USAGE EXAMPLE
+app.get('/data', routes.data);
+app.get('/api', routes.remote_api);
 
-app.get('/logout', account.logout);
-
-app.get('/irlskull', routes.irlskullForm);
-app.post('/irlskull', routes.new_irlskull);
-
-app.get('/photoAdmin', account.ensureAuthenticated, routes.photoAdmin);
-app.post('/photoAdmin/:photo_id/edit', routes.photoEdit);
 
 
 // Turn server on

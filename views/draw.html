@@ -32,12 +32,10 @@
     <p>or suffer serious consequences<p>
 
     {{#currentUser}}
-        <h3>This Skull will be Credited to : <span class="currentUser">{{currentUser.username}}</span> *</h3>
+        <h3>This Skull will be Credited to : <span class="currentUser">{{currentUser}}</span> *</h3>
     {{/currentUser}}
     {{^currentUser}}
-
-        <h3><a href="/register">Join the Skull Klub</a> - then you can - <a href="/login">Sign in & Win</a></h3>
-
+        <h3>If you - <a href="/register">Join the Skull Klub</a> - then you can - <a href="/login">Sign in & Win</a></h3>
     {{/currentUser}}
 
     		<div id="canvasDrawContainer"><canvas id="canvas" width="550" height="550"></canvas></div>
