@@ -38,14 +38,14 @@
 
             $("#penOpaque").click(function(){
                 console.log('opaque pen clicked');
-                $('#canvasDrawContainerOpaqueLayer').css('z-index', '100');
+                $('#canvasDrawContainerOpaqueLayer').css('z-index', '300');
                 $(this).addClass('selected');
                 $('#penTranslucent').removeClass('selected');
             });
 
             $("#penTranslucent").click(function(){
                 console.log('translucent pen clicked');
-                $('#canvasDrawContainerOpaqueLayer').css('z-index', '300');
+                $('#canvasDrawContainerOpaqueLayer').css('z-index', '100');
                 $(this).addClass('selected');
                 $('#penOpaque').removeClass('selected');
             });
