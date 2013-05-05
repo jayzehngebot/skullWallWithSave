@@ -1,0 +1,94 @@
+<div id="drawPageContainer">
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+
+///FORM SAVING STUFF
+
+            
+
+
+
+            function save() {
+                
+                var currentUser = $('.currentUser').text();
+                var canvasOpaque  = document.getElementById("canvasOpaque");
+                var canvasTranslucent  = document.getElementById("canvasTranslucent");
+
+               
+                //the skull lives below
+                var dataUrlOpaque = canvasOpaque.toDataURL();
+                var dataUrlTranslucent = canvasTranslucent.toDataURL();
+
+                //alert(dataUrl);
+                document.getElementById('hiddenFieldOpaque').value = dataUrlOpaque;
+                document.getElementById('hiddenFieldTranslucent').value = dataUrlTranslucent;
+                document.getElementById('cred').value = currentUser;
+                
+                if ($('form').valid()){
+                    document.getElementById("skullForm").submit();
+                } else {
+                    alert('Name The Skull, Bonehead.');
+                    console.log('not valid, dude');
+                }
+  
+            }
+            $("#saveButton").click(save);
+
+            $("#penOpaque").click(function(){
+                console.log('opaque pen clicked');
+                $('#canvasDrawContainerOpaqueLayer').css('z-index', '400');
+                $(this).addClass('selected');
+                $('#penTranslucent').removeClass('selected');
+            });
+
+            $("#penTranslucent").click(function(){
+                console.log('translucent pen clicked');
+                $('#canvasDrawContainerOpaqueLayer').css('z-index', '100');
+                $(this).addClass('selected');
+                $('#penOpaque').removeClass('selected');
+            });
+
+        });
+        </script>
+
+
+   <!--  <h2>No Eraser! Use the whole canvas!</h2> -->
+
+    <br>&nbsp;<br>
+
+    <div id="twoCanvasContainer">
+
+            <p><span id="penOpaque">Opaque Pen</span> <span id="penTranslucent">Translucent Pen</span></p>
+
+
+    		<div id="canvasDrawContainerOpaqueLayer"><canvas id="canvasOpaque" width="550" height="550"></canvas></div>
+
+            <div id="canvasDrawContainerTranslucentLayer"><canvas id="canvasTranslucent" width="550" height="550"></canvas></div>
+
+            
+    </div>
+
+   <!--  <form class="skullForm" id="skullForm" method="POST">
+    	Name Your Skull : <input type="text" name="skullName" class="required" minlength="3" requiured>
+    	<input type='hidden' id= 'hiddenFieldOpaque' name='skullDrawingOpaque' value=''>
+        <input type='hidden' id= 'hiddenFieldTranslucent' name='skullDrawingTranslucent' value=''>
+         <input type='hidden' id= 'cred' name='cred' value=''>
+    	<input type="button" value="Submit" id="saveButton" />
+    </form>
+
+
+
+    {{#currentUser}}
+        <h3>This Skull will be Credited to : <span class="currentUser">{{currentUser}}</span> *</h3>
+    {{/currentUser}}
+    {{^currentUser}}
+        <h3>If you - <a href="/register">Join the Skull Klub</a> - then you can - <a href="/login">Sign in & Win</a></h3>
+    {{/currentUser}}
+    
+    {{#currentUser}}
+        <p>* Not Interested in Attribution ? <a class="smallLink" href="/logout"> Sign Out</a> Before Drawing</p>
+    {{/currentUser}} -->
+
+</div>

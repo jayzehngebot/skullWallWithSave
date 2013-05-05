@@ -59,6 +59,27 @@ exports.makeDrawing = function(req,res) {
 	res.render('draw.html', templateData); 
 }
 
+///////////////////
+
+
+exports.makeDrawingTwo = function(req,res) {
+	var templateData = {
+		updatedText : textHolder
+	}
+
+	if (req.user) {
+      // add currentUser to template Data
+      templateData["currentUser"] = req.user.username;
+    } 
+
+	res.render('drawTwo.html', templateData); 
+}
+
+
+///////////////
+
+
+
 exports.postDrawing = function(req,res) {
 	//var templateData = [];
 		console.log("posting a drawing");
@@ -94,6 +115,55 @@ exports.postDrawing = function(req,res) {
 		});
 	}); // end of .findOne query
 }
+
+
+
+exports.postDrawingTwo = function(req,res) {
+	//var templateData = [];
+		console.log("posting a drawing");
+		console.log(req.body);
+
+		var dataUrlOpaque = req.body.skullDrawingOpaque;
+		var dataUrlTranslucent = req.body.skullDrawingTranslucent;
+		
+		//var dataUrlOpaquePNG = dataUrlOpaque.replace("image/png", "image/octet-stream");
+		//var dataUrlTranslucentPNG = dataUrlTranslucent.replace("image/png", "image/octet-stream");
+
+		var newSkull = new skullModel({
+		name : req.body.skullName,
+		slug : req.body.skullName.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'_'),
+		skullOpaque : req.body.skullDrawingOpaque,
+		skullTranslucent : req.body.skullDrawingTranslucent,
+		cred : req.body.cred,
+		candles : 0
+		});
+			
+		newSkull.save(function(err){
+		
+		var uniqueSkullQuery = skullModel.findOne({ slug : newSkull.slug});
+		uniqueSkullQuery.exec(function(err, foundSkull){
+
+		if (err) {
+			console.error("Error on saving new skull");
+			console.Error("err");
+
+			return res.send("There was an error when creating a new skull");
+
+		} else {
+
+			console.log("Created a new skull");
+			console.log(newSkull);
+			
+			res.redirect('/done');
+		}
+
+		});
+	}); // end of .findOne query
+}
+
+
+
+
 
 exports.done = function(req,res) {
 

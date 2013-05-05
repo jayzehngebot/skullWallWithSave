@@ -76,19 +76,20 @@ var account = require('./routes/accounts.js');
 app.get('/', passport.authenticate(['local','anonymous']), routes.index);
 
 
-// TRIUMVERATE 
+// THE TRIUMVERATE 
 app.get('/draw', passport.authenticate(['local','anonymous']), routes.makeDrawing);
 app.post('/draw', routes.postDrawing);
 app.get('/done', routes.done);
 
+app.get('/drawTwo', routes.makeDrawingTwo);
 
-//PHOTO BUCKET & INSPIRATION BOARD
+
+// PHOTO BUCKET & INSPIRATION BOARD
 app.get('/inspired', passport.authenticate(['local','anonymous']), routes.inspired);
 app.get('/irlskull', routes.irlskullForm);
 app.post('/irlskull', routes.new_irlskull);
 app.get('/photoAdmin', account.ensureAuthenticated, routes.photoAdmin);
 app.post('/photoAdmin/:photo_id/edit', routes.photoEdit);
-
 
 // LOGIN
 app.get('/login', account.login);
@@ -102,8 +103,8 @@ app.get('/logout', account.logout);
 
 
 // THIS IS REDUNDANT. DESTROY IT
-app.get('/write', account.ensureAuthenticated, routes.userMakeDrawing);
-app.post('/write', account.ensureAuthenticated, routes.postDrawing);
+// app.get('/write', account.ensureAuthenticated, routes.userMakeDrawing);
+// app.post('/write', account.ensureAuthenticated, routes.postDrawing);
 
 // EDIT INDIVIDUAL SKULL INFO 
 app.get('/skulls/:skull_slug/data', routes.skullData);
@@ -113,8 +114,7 @@ app.post('/skulls/:skull_slug/edit', routes.updateSkull);
 // RAW DATA AND API USAGE EXAMPLE
 app.get('/data', routes.data);
 app.get('/api', routes.remote_api);
-
-
+  
 
 // Turn server on
 var port = process.env.PORT || 5000;
