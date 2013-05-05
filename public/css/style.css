@@ -216,7 +216,7 @@ form{
 	width: 550px;
 	height: 550px;
 	/*background-color: red;*/
-	z-index: 300;
+	z-index: 200;
 	opacity: .25;
 }
 
@@ -227,7 +227,7 @@ form{
 	width: 550px;
 	height: 550px;
 	/*background-color: blue;*/
-	z-index: 100;
+	z-index: 300;
 	box-shadow: 0px 5px 20px #C9C9C9;
 }
 
