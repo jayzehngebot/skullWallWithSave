@@ -125,6 +125,12 @@ exports.postDrawingTwo = function(req,res) {
 
 		var dataUrlOpaque = req.body.skullDrawingOpaque;
 		var dataUrlTranslucent = req.body.skullDrawingTranslucent;
+
+
+////// adding image
+
+
+//////
 		
 		//var dataUrlOpaquePNG = dataUrlOpaque.replace("image/png", "image/octet-stream");
 		//var dataUrlTranslucentPNG = dataUrlTranslucent.replace("image/png", "image/octet-stream");
