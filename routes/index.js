@@ -14,6 +14,7 @@ var Photo = require('../models/photo.js');
 
 
 var projectTitle = "SKULLWALL";
+var textHolder = "";
 
 // Amazon Buckets
 var fs = require('fs');
