@@ -1,10 +1,10 @@
 
 /*
- * routes/index.js
- * 
- * Routes contains the functions (callbacks) associated with request urls.
+ *  Routing
  */
-var moment = require("moment"); // date manipulation library
+
+
+var moment = require("moment");
 var skullModel = require('../models/skullModel.js');
 var request = require('request');
 var user = require('../models/user.js'); 
