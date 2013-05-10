@@ -5,17 +5,17 @@
 
 
 var moment = require("moment");
-var skullModel = require('../models/skullModel.js');
 var request = require('request');
+
+// Database Models
+var skullModel = require('../models/skullModel.js');
 var user = require('../models/user.js'); 
+var Photo = require('../models/photo.js');
 
 
 var projectTitle = "SKULLWALL";
-var textHolder = "";
 
-
-var Photo = require('../models/photo.js');
-
+// Amazon Buckets
 var fs = require('fs');
 var AWS = require('aws-sdk');
 AWS.config.update({
@@ -24,7 +24,9 @@ AWS.config.update({
 });
 var s3 = new AWS.S3();
 
-
+// Here we go ...
+// The code below handles paths
+// Assigned via app.js
 
 exports.index = function(req, res) {
 	
@@ -33,18 +35,16 @@ exports.index = function(req, res) {
 	var templateData = {
 		title : projectTitle,
 	}
-
 	if (req.user) {
-      // res.json({ username: req.user.username, email: req.user.email });
       console.log('user is logged in as :'+ req.user.username);
       templateData["currentUser"] = req.user.username;
     } else {
-      //res.json({ anonymous: true });
       console.log('user is anon');
     }
-
 	res.render('index.html', templateData);
 }
+
+///////////////////
 
 exports.makeDrawing = function(req,res) {
 	var templateData = {
@@ -60,6 +60,7 @@ exports.makeDrawing = function(req,res) {
 }
 
 ///////////////////
+// Currently not using this - second drawing tool
 
 
 exports.makeDrawingTwo = function(req,res) {
@@ -75,10 +76,7 @@ exports.makeDrawingTwo = function(req,res) {
 	res.render('drawTwo.html', templateData); 
 }
 
-
 ///////////////
-
-
 
 exports.postDrawing = function(req,res) {
 	//var templateData = [];
@@ -101,36 +99,28 @@ exports.postDrawing = function(req,res) {
 		if (err) {
 			console.error("Error on saving new skull");
 			console.Error("err");
-
 			return res.send("There was an error when creating a new skull");
 
 		} else {
-
 			console.log("Created a new skull");
 			console.log(newSkull);
-			
 			res.redirect('/done');
 		}
 
 		});
-	}); // end of .findOne query
+	}); 
 }
 
-
+// Handling the two-layer posting
+// Currently the Skull Model Does not accomodate these fields
 
 exports.postDrawingTwo = function(req,res) {
-	//var templateData = [];
+
 		console.log("posting a drawing");
 		console.log(req.body);
 
 		var dataUrlOpaque = req.body.skullDrawingOpaque;
 		var dataUrlTranslucent = req.body.skullDrawingTranslucent;
-
-
-////// adding image
-
-
-//////
 		
 		//var dataUrlOpaquePNG = dataUrlOpaque.replace("image/png", "image/octet-stream");
 		//var dataUrlTranslucentPNG = dataUrlTranslucent.replace("image/png", "image/octet-stream");
@@ -164,7 +154,7 @@ exports.postDrawingTwo = function(req,res) {
 		}
 
 		});
-	}); // end of .findOne query
+	});
 }
 
 
@@ -220,8 +210,6 @@ exports.inspired =  function(req,res){
 		    } else {
 		      //console.log('user is anon');
 		    }
-
- 
 
       res.render("inspired.html", templateData);
 
@@ -425,13 +413,9 @@ exports.new_irlskull = function(req, res){
     var s3bucket = new AWS.S3({params: {Bucket: 'skullsIRL'}});
     
     // Set the bucket object properties
-    // Key == filename
-    // Body == contents of file
-    // ACL == Should it be public? Private?
-    // ContentType == MimeType of file ie. image/jpeg.
     var params = {
-      Key: cleanedFileName,
-      Body: file_buffer,
+      Key: cleanedFileName, // Key = filename
+      Body: file_buffer, // Body == contents of file
       ACL: 'public-read',
       ContentType: mimeType
     };
@@ -513,6 +497,7 @@ exports.photoEdit = function(req,res){
 
 }
 
+/// Cleaning function to ward off S3 Bucket Naming Collisions
 var cleanFileName = function(filename) {
 
     fileParts = filename.split(".");
