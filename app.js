@@ -79,6 +79,9 @@ app.get('/draw', passport.authenticate(['local','anonymous']), routes.makeDrawin
 app.post('/draw', routes.postDrawing);
 app.get('/done', routes.done);
 
+// PURCHASE PAGE
+app.get('/purchase', routes.purchase);
+
 // EXPERIMENTAL TWO TOOL DRAWING
 app.get('/drawTwo', routes.makeDrawingTwo);
 

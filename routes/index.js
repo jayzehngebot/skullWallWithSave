@@ -157,8 +157,9 @@ exports.postDrawingTwo = function(req,res) {
 	});
 }
 
-
-
+exports.purchase = function(req,res) {
+		res.render('purchase.html'); 
+}
 
 
 exports.done = function(req,res) {
