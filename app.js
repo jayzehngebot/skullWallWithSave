@@ -7,7 +7,7 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , mongoose = require('mongoose')
-  , mongoStore = require('connect-mongo')
+  , mongoStore = require('connect-mongodb')
   , passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy
   , AnonymousStrategy = require('passport-anonymous').Strategy;
@@ -20,7 +20,7 @@ var app = express();
 app.configure(function(){
 
     // MongoDB
-  app.db = mongoose.connect(process.env.MONGOLAB_URI);
+  app.db = mongoose.connect(process.env.MONGOLAB_URI, {db:{safe:false}});
 
   //  Set templates for 'views'
   app.set('views', __dirname + '/views');
