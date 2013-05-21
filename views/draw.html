@@ -4,7 +4,30 @@
         $(document).ready(function() {
 
 
-            function save() {
+
+            //  function save() {
+                
+            //     var currentUser = $('.currentUser').text();
+            //     var canvas  = document.getElementById("canvas");
+            //     //the skull lives below
+            //     var dataUrl = canvas.toDataURL();
+            //     //alert(dataUrl);
+            //     document.getElementById('hiddenField').value = dataUrl;
+            //     console.log('writing skull');
+            //     document.getElementById('cred').value = currentUser;
+                
+            //     if ($('form').valid()){
+            //         document.getElementById("skullForm").submit();
+            //         console.log('submitting form');
+            //     } else {
+            //         alert('Name The Skull, Bonehead.');
+            //         console.log('not valid, dude');
+            //     }
+  
+            // }
+            // $("#saveButton").click(save);
+
+            function save(callback){
                 
                 var currentUser = $('.currentUser').text();
                 var canvas  = document.getElementById("canvas");
@@ -12,24 +35,33 @@
                 var dataUrl = canvas.toDataURL();
                 //alert(dataUrl);
                 document.getElementById('hiddenField').value = dataUrl;
+                console.log('writing skull');
                 document.getElementById('cred').value = currentUser;
+
+                callback();
                 
-                if ($('form').valid()){
-                    document.getElementById("skullForm").submit();
-                } else {
-                    alert('Name The Skull, Bonehead.');
-                    console.log('not valid, dude');
-                }
-  
-            }
-            $("#saveButton").click(save);
+            };
 
+                $("#saveButton").click(function(){
 
+                    save(function(){
+                        if ($('form').valid()){
+                            document.getElementById("skullForm").submit();
+                            console.log('submitting form');
+                        } else {
+                            alert('Name The Skull, Bonehead.');
+                            console.log('not valid, dude');
+                        }
+                });
+            });
         });
-        </script>
+    </script>
+           
 
-    <h2>use the whole canvas</h2>
-    <p>or suffer serious consequences<p>
+
+
+
+    
 
     {{#currentUser}}
         <h3>This Skull will be Credited to : <span class="currentUser">{{currentUser}}</span> *</h3>
@@ -38,14 +70,16 @@
         <h3>If you - <a href="/register">Join the Skull Klub</a> - then you can - <a href="/login">Sign in & Win</a></h3>
     {{/currentUser}}
 
-    		<div id="canvasDrawContainer"><canvas id="canvas" width="550" height="550"></canvas></div>
+            <div id="canvasDrawContainer"><canvas id="canvas" width="550" height="550"></canvas></div>
 
+    <h2>Did you use the whole canvas?</h2>
     <form class="skullForm" id="skullForm" method="POST">
-    	Name Your Skull : <input type="text" name="skullName" class="required" minlength="3" requiured>
-    	<input type='hidden' id= 'hiddenField' name='skullDrawing' value=''>
+        Name Your Skull : <input type="text" name="skullName" class="required" minlength="3" requiured>
+        <input type='hidden' id= 'hiddenField' name='skullDrawing' value=''>
          <input type='hidden' id= 'cred' name='cred' value=''>
-    	<input type="button" value="Submit" id="saveButton" />
+        <input type="button" value="Submit" id="saveButton" />
     </form>
+
     {{#currentUser}}
         <p>* Not Interested in Attribution ? <a class="smallLink" href="/logout"> Sign Out</a> Before Drawing</p>
     {{/currentUser}}
